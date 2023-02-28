@@ -1,6 +1,6 @@
 package com.kh.mini.dao;
 
 public class Test {
-    String name = "hello world";
+    String name = "hello word";
 
 }
