@@ -1,6 +1,7 @@
 package com.kh.mini;
 
 import com.kh.mini.dao.OrderDAO;
+import com.kh.mini.dao.ProductDAO;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.OrderList;
 
@@ -19,6 +20,9 @@ public class JdbcMain {
             int table = sc.nextInt();
             switch (table) {
                 case 1:
+                    ProductDAO productDAO = new ProductDAO();
+                    productDAO.productSelect();
+                    break;
                 case 2:
                 case 3:
                 case 4:

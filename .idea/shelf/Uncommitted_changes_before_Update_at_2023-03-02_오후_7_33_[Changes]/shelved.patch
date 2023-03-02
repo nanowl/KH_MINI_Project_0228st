@@ -1,0 +1,328 @@
+Index: src/com/kh/mini/JdbcMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.kh.mini;\r\n\r\nimport com.kh.mini.dao.OrderDAO;\r\nimport com.kh.mini.vo.OrderList;\r\n\r\nimport java.util.Scanner;\r\n\r\npublic class JdbcMain {\r\n    public static void main(String[] args) {\r\n\r\n    }\r\n    public static void menuSelect() {\r\n        Scanner sc = new Scanner(System.in);\r\n        while(true) {\r\n            System.out.println(\"===== [DB Controller] =====\");\r\n            System.out.println(\"테이블을 선택하세요 :\");\r\n            System.out.print(\"[1]PRODUCTS, [2]CUSTOMER, [3]CART, [4]ORDER, [5]EXIT : \");\r\n            int table = sc.nextInt();\r\n            switch (table) {\r\n                case 1:\r\n                case 2:\r\n                case 3:\r\n                case 4:\r\n                    OrderDAO orderDAO = new OrderDAO();\r\n\r\n                case 5:\r\n                    System.out.println(\"프로그램을 종료합니다.\");\r\n                    return;\r\n            }\r\n\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/kh/mini/JdbcMain.java b/src/com/kh/mini/JdbcMain.java
+--- a/src/com/kh/mini/JdbcMain.java	(revision eef78788aeda944cd7cc28b656af91d0d0c34c87)
++++ b/src/com/kh/mini/JdbcMain.java	(date 1677753222376)
+@@ -1,13 +1,15 @@
+ package com.kh.mini;
+ 
+ import com.kh.mini.dao.OrderDAO;
++import com.kh.mini.dao.ProductDAO;
++import com.kh.mini.util.Common;
+ import com.kh.mini.vo.OrderList;
+ 
+ import java.util.Scanner;
+ 
+ public class JdbcMain {
+     public static void main(String[] args) {
+-
++        Common.getConnection();
+     }
+     public static void menuSelect() {
+         Scanner sc = new Scanner(System.in);
+@@ -18,11 +20,13 @@
+             int table = sc.nextInt();
+             switch (table) {
+                 case 1:
++                    ProductDAO productDAO = new ProductDAO();
++                    break;
+                 case 2:
+                 case 3:
+                 case 4:
+                     OrderDAO orderDAO = new OrderDAO();
+-
++                    break;
+                 case 5:
+                     System.out.println("프로그램을 종료합니다.");
+                     return;
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1677744906638)
++++ b/.idea/uiDesigner.xml	(date 1677744906638)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/kh/mini/dao/ProductDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/kh/mini/dao/ProductDAO.java b/src/com/kh/mini/dao/ProductDAO.java
+new file mode 100644
+--- /dev/null	(date 1677753222370)
++++ b/src/com/kh/mini/dao/ProductDAO.java	(date 1677753222370)
+@@ -0,0 +1,103 @@
++package com.kh.mini.dao;
++
++import com.kh.mini.util.Common;
++import com.kh.mini.vo.OrderList;
++import com.kh.mini.vo.Products;
++
++import java.sql.*;
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Scanner;
++
++/*
++장바구니 표시 데이터 : 상품이름 , 고객아이디, 개수
++ */
++public class ProductDAO implements DAO {
++    Connection conn = null;
++    Statement stmt = null;
++    PreparedStatement  pstmt = null;
++    ResultSet rs = null;
++    static List<Products> list = new ArrayList<>();
++    public List<Products> listEmp() {
++
++
++        try {
++            conn = Common.getConnection();
++            stmt = conn.createStatement();
++            String query = "SELECT * FROM PRODUCTS";
++            rs = stmt.executeQuery(query);
++
++            while(rs.next()) {
++                int id = rs.getInt("PRODUCT_ID");
++                String name = rs.getString("PRODUCT_NAME");
++                String color = rs.getString("COLOR");
++                int price = rs.getInt("PRICE");
++                String made = rs.getString("MADE_IN");
++
++
++                    Products vo = new Products(id, name, color, price, made);
++
++                list.add(vo);
++            }
++            Common.close(rs);
++            Common.close(stmt);
++            Common.close(conn);
++
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++        return list;
++    }
++
++
++    @Override
++    public void selectList() {
++            for(Products e : list) {
++                System.out.print(e.getProductId() + " ");
++                System.out.print(e.getProductName() + " ");
++                System.out.print(e.getColor() + " ");
++                System.out.print(e.getPrice() + " ");
++                System.out.print(e.getMade() + " ");
++                System.out.println();
++            }
++        }
++
++
++    @Override
++    public void insertList() {
++        Scanner sc = new Scanner(System.in);
++
++
++        System.out.print("상품명을 입력해주세요.");
++        String productName = sc.next();
++        System.out.print("색상을 입력해주세요.");
++        String color = sc.next();
++        System.out.print("가격을 입력해주세요.");
++        int price = sc.nextInt();
++        System.out.print("생산지를 입력해주세요.");
++        String made = sc.next();
++
++        String sql = "INSERT INTO PRODUCTS VALUES (SEQ_PRODUCTS.NEXTVAL, ?, ?, ?, ?)";
++
++        try {
++            conn = Common.getConnection();
++            pstmt = conn.prepareStatement(sql);
++            pstmt.setString(1, productName  );
++            pstmt.setString(2, color);
++            pstmt.setInt(3, price);
++            pstmt.setString(4, made );
++            pstmt.executeUpdate();
++
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++        Common.close(pstmt);
++        Common.close(conn);
++    }
++
++
++    @Override
++    public void deleteList() {
++
++    }
++}
+Index: KH_MINI_Project_0228st.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/KH_MINI_Project_0228st.iml b/KH_MINI_Project_0228st.iml
+--- a/KH_MINI_Project_0228st.iml	(revision eef78788aeda944cd7cc28b656af91d0d0c34c87)
++++ b/KH_MINI_Project_0228st.iml	(date 1677748584464)
+@@ -7,5 +7,6 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="ojdbc11" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/libraries/ojdbc11.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/ojdbc11.xml b/.idea/libraries/ojdbc11.xml
+new file mode 100644
+--- /dev/null	(date 1677748584488)
++++ b/.idea/libraries/ojdbc11.xml	(date 1677748584488)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="ojdbc11">
++    <CLASSES>
++      <root url="file://$USER_HOME$/Downloads/ojdbc11" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
