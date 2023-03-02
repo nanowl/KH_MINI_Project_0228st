@@ -1,10 +1,8 @@
 package com.kh.mini.dao;
 
 import com.kh.mini.util.Common;
-import com.kh.mini.vo.OrderList;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -19,18 +17,18 @@ public class OrderDAO {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELECT * FROM EMP";
+            String query = "SELECT * FROM PRODUCTS";
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
-                int no = rs.getInt("ORDER_NO");
-                Date date = rs.getDate("ORDER_DATE");
-                int pdtNo = rs.getInt("PDT_NO");
-                String custId = rs.getString("CUST_ID");
-                String loc = rs.getString("LOC");
+                int id = rs.getInt("PRODUCT_ID");
+                String name= rs.getString("PRODUCT_NAME");
+                String color = rs.getString("COLOR");
                 int price = rs.getInt("PRICE");
+                String made = rs.getString("MADE_IN");
 
-                OrderList vo = new OrderList(no, date, pdtNo, custId, loc, price);
+
+                OrderList vo = new OrderList(id, name, color, price, made);
 
                 list.add(vo);
             }
