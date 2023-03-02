@@ -1,5 +1,6 @@
 package com.kh.mini;
 
+import com.kh.mini.dao.CartDAO;
 import com.kh.mini.dao.OrderDAO;
 import com.kh.mini.dao.ProductDAO;
 import com.kh.mini.util.Common;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 
 public class JdbcMain {
     public static void main(String[] args) {
+        //Common.getConnection();
         menuSelect();
     }
     public static void menuSelect() {
@@ -25,6 +27,8 @@ public class JdbcMain {
                     break;
                 case 2:
                 case 3:
+                    CartDAO cartDAO = new CartDAO();
+                    cartDAO.cartSelect();
                 case 4:
                     OrderDAO orderDAO = new OrderDAO();
                     orderDAO.orderSelect();
