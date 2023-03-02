@@ -1,13 +1,14 @@
 package com.kh.mini;
 
 import com.kh.mini.dao.OrderDAO;
+import com.kh.mini.util.Common;
 import com.kh.mini.vo.OrderList;
 
 import java.util.Scanner;
 
 public class JdbcMain {
     public static void main(String[] args) {
-
+        menuSelect();
     }
     public static void menuSelect() {
         Scanner sc = new Scanner(System.in);
@@ -22,7 +23,8 @@ public class JdbcMain {
                 case 3:
                 case 4:
                     OrderDAO orderDAO = new OrderDAO();
-
+                    orderDAO.orderSelect();
+                    break;
                 case 5:
                     System.out.println("프로그램을 종료합니다.");
                     return;
