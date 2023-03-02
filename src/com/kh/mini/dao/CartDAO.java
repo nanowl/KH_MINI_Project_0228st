@@ -15,13 +15,15 @@ import java.util.Scanner;
     from products
  */
 public class CartDAO implements DAO{
+    static List<CartList> list = new ArrayList<>();
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement pstmt = null;
-    static List<CartList> list = new ArrayList<>();
+
     public void listCart() {
         try {
+            list.clear();
             conn = Common.getConnection();
             stmt = conn.createStatement();
             String query = "SELECT * FROM CART";
