@@ -118,6 +118,22 @@ public class CartDAO implements DAO{
 
     @Override
     public void deleteList() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("삭제할 가구번호를 입력 하세요 : ");
+        int pdt_no = sc.nextInt();
+        String sql = "DELETE FROM CART WHERE PDT_NO_CART = ?";
 
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, pdt_no);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pstmt);
+        Common.close(conn);
     }
-}
+    }
+
