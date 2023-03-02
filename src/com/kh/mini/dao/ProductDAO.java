@@ -125,6 +125,21 @@ public class ProductDAO implements DAO {
 
     @Override
     public void deleteList() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("삭제할 목록을 입력 하세요 : ");
+        String name = sc.next();
+        String sql = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
+        try {
+            conn = Common.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pstmt);
+        Common.close(conn);
     }
 }
