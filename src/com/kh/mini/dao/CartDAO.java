@@ -90,7 +90,7 @@ public class CartDAO implements DAO{
 
 
         System.out.print("가구번호를 입력하세요.");
-        int productName = sc.nextInt();
+        int PDT_NO_NUMBER = sc.nextInt();
         System.out.print("유저아이디를 입력해주세요.");
         String user_id_cart = sc.next();
         System.out.print("수량을 입력해주세요.");
@@ -102,7 +102,7 @@ public class CartDAO implements DAO{
         try {
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, productName);
+            pstmt.setInt(1, PDT_NO_NUMBER);
             pstmt.setString(2, user_id_cart);
             pstmt.setInt(3, cnt);
             pstmt.executeUpdate();
