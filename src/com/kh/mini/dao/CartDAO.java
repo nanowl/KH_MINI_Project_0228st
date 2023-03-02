@@ -15,7 +15,7 @@ import java.util.Scanner;
     from products
  */
 public class CartDAO implements DAO{
-    static List<CartList> list = new ArrayList<>();
+    List<CartList> list = new ArrayList<>();
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
