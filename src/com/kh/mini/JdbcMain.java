@@ -1,6 +1,7 @@
 package com.kh.mini;
 
 import com.kh.mini.dao.CartDAO;
+import com.kh.mini.dao.CustomerDAO;
 import com.kh.mini.dao.OrderDAO;
 import com.kh.mini.dao.ProductDAO;
 import com.kh.mini.util.Common;
@@ -26,9 +27,13 @@ public class JdbcMain {
                     productDAO.productSelect();
                     break;
                 case 2:
+                    CustomerDAO customerDAO = new CustomerDAO();
+                    customerDAO.customerSelect();
+                    break;
                 case 3:
                     CartDAO cartDAO = new CartDAO();
                     cartDAO.cartSelect();
+                    break;
                 case 4:
                     OrderDAO orderDAO = new OrderDAO();
                     orderDAO.orderSelect();
@@ -37,7 +42,6 @@ public class JdbcMain {
                     System.out.println("프로그램을 종료합니다.");
                     return;
             }
-
         }
     }
 }
