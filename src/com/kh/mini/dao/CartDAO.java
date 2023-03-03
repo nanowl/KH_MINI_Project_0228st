@@ -140,7 +140,8 @@ public class CartDAO implements DAO{
     // 장바구니 추가 관련 기능
     // 참조하는 상품명을 따로 리스트를 불러와서 추가하는 구현 기능
 
-    public void insertList(String id) {
+    @Override
+    public void insertList() {
         Scanner sc = new Scanner(System.in);
         Map view = new HashMap();
 
@@ -149,49 +150,49 @@ public class CartDAO implements DAO{
             stmt = conn.createStatement();
             String query = "SELECT * FROM PRODUCTS";
             rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    int id2 = rs.getInt("PRODUCT_ID");
+                    String name = rs.getString("PRODUCT_NAME");
+                    int price = rs.getInt("PRICE");
+                    view.put(id2, name + " (" + price + "원)");
+                }
 
-            while(rs.next()) {
-                int id2 = rs.getInt("PRODUCT_ID");
-                String name = rs.getString("PRODUCT_NAME");
-                int price = rs.getInt("PRICE");
-                view.put(id,name+" ("+price+"원)");
+                Common.close(rs);
+                Common.close(stmt);
+                Common.close(conn);
+
+            } catch(Exception e){
+                e.printStackTrace();
             }
-            Common.close(rs);
-            Common.close(stmt);
+
+            view.forEach((key, value) -> {
+                System.out.println("[" + key + "]" + " : " + value);
+            });
+
+            System.out.print("장바구니에 넣을 가구를 선택해주세요 [숫자 입력]");
+            int PDT_NO_NUMBER = sc.nextInt();
+            System.out.print("유저아이디를 입력해주세요.");
+            String user_id_cart = sc.next();
+            System.out.print("수량을 입력해주세요.");
+            int cnt = sc.nextInt();
+
+
+            String sql = "INSERT INTO CART VALUES ( ?, ?, ?)";
+
+            try {
+                conn = Common.getConnection();
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, PDT_NO_NUMBER);
+                pstmt.setString(2, user_id_cart);
+                pstmt.setInt(3, cnt);
+                pstmt.executeUpdate();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Common.close(pstmt);
             Common.close(conn);
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
-        view.forEach((key, value) -> {
-            System.out.println("["+key+"]" + " : " + value);
-        });
-
-        System.out.print("장바구니에 넣을 가구를 선택해주세요 [숫자 입력]");
-        int PDT_NO_NUMBER = sc.nextInt();
-        System.out.print("유저아이디를 입력해주세요.");
-        String user_id_cart = sc.next();
-        System.out.print("수량을 입력해주세요.");
-        int cnt = sc.nextInt();
-
-
-        String sql = "INSERT INTO CART VALUES ( ?, ?, ?)";
-
-        try {
-            conn = Common.getConnection();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, PDT_NO_NUMBER);
-            pstmt.setString(2, user_id_cart);
-            pstmt.setInt(3, cnt);
-            pstmt.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Common.close(pstmt);
-        Common.close(conn);
-    }
 
 
 
