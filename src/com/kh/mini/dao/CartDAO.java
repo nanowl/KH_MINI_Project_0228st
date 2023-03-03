@@ -30,7 +30,7 @@ public class CartDAO implements DAO{
             list.clear();
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELECT * FROM CART C JOIN PRODUCTS P ON C.PDT_NO_CART = P.PRODUCT_ID";
+            String query = "SELECT * FROM CART C JOIN PRODUCTS P ON C.PDT_NO_CART = P.PRODUCT_ID WHERE CNT >= 1";
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
@@ -139,8 +139,8 @@ public class CartDAO implements DAO{
 
     // 장바구니 추가 관련 기능
     // 참조하는 상품명을 따로 리스트를 불러와서 추가하는 구현 기능
-    @Override
-    public void insertList() {
+
+    public void insertList(String id) {
         Scanner sc = new Scanner(System.in);
         Map view = new HashMap();
 
@@ -151,7 +151,7 @@ public class CartDAO implements DAO{
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
-                int id = rs.getInt("PRODUCT_ID");
+                int id2 = rs.getInt("PRODUCT_ID");
                 String name = rs.getString("PRODUCT_NAME");
                 int price = rs.getInt("PRICE");
                 view.put(id,name+" ("+price+"원)");
