@@ -6,9 +6,12 @@ public class OrderList {
     int no ;
     Date date;
     int pdtNo;
+    String pdtName;
     String userId;
     String loc;
     int price;
+
+    public OrderList() {}
 
     public OrderList(int no, Date date, int pdtNo, String userId, String loc, int price) {
         this.no = no;
@@ -18,9 +21,6 @@ public class OrderList {
         this.loc = loc;
         this.price = price;
     }
-
-
-
 
 
     public int getNo() {
@@ -45,6 +45,14 @@ public class OrderList {
 
     public void setPdtNo(int pdtNo) {
         this.pdtNo = pdtNo;
+    }
+
+    public String getPdtName() {
+        return pdtName;
+    }
+
+    public void setPdtName(String pdtName) {
+        this.pdtName = pdtName;
     }
 
     public String getUserId() {

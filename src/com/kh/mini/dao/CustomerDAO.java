@@ -101,7 +101,7 @@ public class CustomerDAO implements DAO{
         System.out.print("성함을 입력해주세요.");
         String userName = sc.next();
         System.out.print("전화번호를 입력해주세요.");
-        int phone = sc.nextInt();
+        String phone = sc.next();
         System.out.print("이메일을 입력해주세요.");
         String eMail = sc.next();
         System.out.print("주소를 입력해주세요.");
@@ -115,7 +115,7 @@ public class CustomerDAO implements DAO{
             pstmt.setString(1, userId);
             pstmt.setString(2, userPwd);
             pstmt.setString(3, userName);
-            pstmt.setInt(4, phone);
+            pstmt.setString(4, phone);
             pstmt.setString(5, eMail);
             pstmt.setString(6, address);
             pstmt.executeUpdate();
