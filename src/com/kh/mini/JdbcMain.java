@@ -2,6 +2,7 @@ package com.kh.mini;
 
 import com.kh.mini.dao.*;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class JdbcMain {
@@ -10,7 +11,7 @@ public class JdbcMain {
         mainView();
     }
 
-    public static void mainView() {
+    public static void mainView()  {
         CustomerDAO customerDAO = new CustomerDAO();
         while (true) {
             System.out.print("========= 온라인 가구 샵 =========");
@@ -25,8 +26,9 @@ public class JdbcMain {
                     System.out.print("PW : ");
                     String pwd = sc.next(); // 입력한 비밀번호 저장
 
-                    boolean login = false;
-                    if (login) shopView(id);
+                    boolean isLogin = false;
+                    isLogin = customerDAO.login(id, pwd);
+                    if (isLogin) shopView(id);
                     break;
                 case 2 :
                     customerDAO.insertList();
