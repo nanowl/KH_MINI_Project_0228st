@@ -3,10 +3,7 @@ package com.kh.mini.dao;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.OrderList;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,6 +19,8 @@ public class OrderDAO implements DAO{
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        PreparedStatement pstmt = null;
+        Scanner sc = new Scanner(System.in);
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
@@ -93,6 +92,7 @@ public class OrderDAO implements DAO{
 
     @Override
     public void insertList() {
+        System.out.print("");
 
     }
 

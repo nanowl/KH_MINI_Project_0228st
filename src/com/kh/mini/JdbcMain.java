@@ -1,9 +1,6 @@
 package com.kh.mini;
 
-import com.kh.mini.dao.CartDAO;
-import com.kh.mini.dao.CustomerDAO;
-import com.kh.mini.dao.OrderDAO;
-import com.kh.mini.dao.ProductDAO;
+import com.kh.mini.dao.*;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.OrderList;
 
@@ -27,8 +24,8 @@ public class JdbcMain {
                     productDAO.productSelect();
                     break;
                 case 2:
-                    CustomerDAO customerDAO = new CustomerDAO();
-                    customerDAO.customerSelect();
+//                    CustomerDAO customerDAO = new CustomerDAO();
+//                    customerDAO.customerSelect();
                     break;
                 case 3:
                     CartDAO cartDAO = new CartDAO();
