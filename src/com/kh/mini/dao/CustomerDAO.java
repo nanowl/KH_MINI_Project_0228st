@@ -4,20 +4,18 @@ import com.kh.mini.util.Common;
 import com.kh.mini.vo.Customer;
 import com.kh.mini.vo.Products;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CustomerDAO implements DAO{
+public class CustomerDAO implements DAO {
     Connection conn = null;
     Statement stmt = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     List<Customer> list = new ArrayList<>();
+
     public void listCustomer() {
         try {
             conn = Common.getConnection();
@@ -25,7 +23,7 @@ public class CustomerDAO implements DAO{
             String query = "SELECT * FROM Customer";
             rs = stmt.executeQuery(query);
 
-            while(rs.next()) {
+            while (rs.next()) {
                 String userId = rs.getString("USER_ID");
                 String userPwd = rs.getString("USER_PWD");
                 String userName = rs.getString("USER_NAME");
@@ -49,25 +47,25 @@ public class CustomerDAO implements DAO{
 
     public void customerSelect() {
         Scanner sc = new Scanner(System.in);
-        while(true) {
+        while (true) {
             System.out.println("===== [Customer Table] =====");
             System.out.println("메뉴를 선택 하세요 : ");
             System.out.println("[1]SELECT, [2]INSERT, [3]UPDATE, [4]DELETE, [5]EXIT");
             int sel = sc.nextInt();
-            switch(sel) {
+            switch (sel) {
                 case 1:
                     listCustomer();
                     selectList();
                     break;
-                case 2 :
+                case 2:
                     insertList();
                     break;
-                case 3 :
+                case 3:
                     break;
-                case 4 :
+                case 4:
                     deleteList();
                     break;
-                case 5 :
+                case 5:
                     System.out.println("메뉴를 종료 합니다");
                     return;
             }
@@ -77,7 +75,7 @@ public class CustomerDAO implements DAO{
 
     @Override
     public void selectList() {
-        for(Customer e : list) {
+        for (Customer e : list) {
             System.out.print(e.getUserId() + " ");
             System.out.print(e.getUserPwd() + " ");
             System.out.print(e.getUserName() + " ");
@@ -132,4 +130,31 @@ public class CustomerDAO implements DAO{
     public void deleteList() {
 
     }
+
+    public boolean login(String ID, String Password) {
+        conn = Common.getConnection();
+        try {
+            String SQL = "SELECT USER_ID, USER_PWD FROM CUSTOMER WHERE USER_ID = ? AND USER_PWD = ?";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, ID);
+            pstmt.setString(2, Password);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if (rs.getString("USER_PWD").equals(Password) && rs.getString("USER_ID").equals(ID))
+                    return true;
+                else
+                    return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
+
+
+
+
+
+
