@@ -19,6 +19,10 @@ public class OrderList {
         this.price = price;
     }
 
+
+
+
+
     public int getNo() {
         return no;
     }

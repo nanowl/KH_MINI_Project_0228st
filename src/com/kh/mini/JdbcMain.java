@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class JdbcMain {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        mainView();
+       // mainView();
+        shopView("Ralo11");
+
     }
 
     public static void mainView() {
@@ -53,6 +55,9 @@ public class JdbcMain {
                     cartDAO.insertList();
                     break;
                 case 3 :
+                    CartDAO cartDAO1 = new CartDAO();
+                    cartDAO1.viewCart(id);
+
                     //장바구니의 상품번호를 대신해서 상품이름을 조회
                     //Products 테이블이랑 조인해서 가져올것
                     break;

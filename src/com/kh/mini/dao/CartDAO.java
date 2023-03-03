@@ -1,5 +1,6 @@
 package com.kh.mini.dao;
 
+import com.kh.mini.JdbcMain;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.CartList;
 import com.kh.mini.vo.OrderList;
@@ -15,17 +16,55 @@ import java.util.*;
  */
 public class CartDAO implements DAO{
     List<CartList> list = new ArrayList<>();
+    String id ;
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement pstmt = null;
 
+
+
+
+    public void viewCart(String id) {
+        try {
+            list.clear();
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM CART C JOIN PRODUCTS P ON C.PDT_NO_CART = P.PRODUCT_ID";
+            rs = stmt.executeQuery(query);
+
+            while(rs.next()) {
+                String no = rs.getString("PRODUCT_NAME");
+                String userId = rs.getString("USER_ID_CART");
+                int cnt = rs.getInt("cnt");
+                if(id.equals(userId)) {
+                    CartList vo = new CartList(userId, no, cnt);
+
+                    list.add(vo);
+                }
+            }
+            Common.close(rs);
+            Common.close(stmt);
+            Common.close(conn);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (CartList e : list) {
+            System.out.println("=========================================") ;
+            System.out.println("아이디 : " + e.getUSER_ID_CART());
+            System.out.println("-----------------------------------------") ;
+            System.out.println("상품명 : " + e.getPRODUCT_NAME());
+            System.out.println(" 수량 :  " + e.getCnt());
+            System.out.println("-----------------------------------------") ;
+        }
+    }
     public void listCart() {
         try {
             list.clear();
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String query = "SELECT * FROM CART";
+            String query = "SELECT * FROM CART C JOIN PRODUCTS P ON C.PDT_NO_CART = P.PRODUCT_ID";
             rs = stmt.executeQuery(query);
 
             while(rs.next()) {
@@ -44,6 +83,18 @@ public class CartDAO implements DAO{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+            for (CartList e : list) {
+                System.out.println("=========================================") ;
+                System.out.println("아이디 : " + e.getUSER_ID_CART());
+                System.out.println("-----------------------------------------") ;
+                System.out.println("수량 : " + e.getCnt());
+                System.out.println("-----------------------------------------") ;
+                System.out.println("상품아이디 : " + e.getPDT_NO_NUMBER());
+                System.out.println("-----------------------------------------") ;
+            }
+
     }
 
     public void cartSelect() {
