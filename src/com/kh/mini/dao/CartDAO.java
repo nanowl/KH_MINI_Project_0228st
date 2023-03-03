@@ -3,11 +3,10 @@ package com.kh.mini.dao;
 import com.kh.mini.util.Common;
 import com.kh.mini.vo.CartList;
 import com.kh.mini.vo.OrderList;
+import com.kh.mini.vo.Products;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /*
 장바구니 표시 데이터 : 상품이름 , 고객아이디, 개수
@@ -86,12 +85,39 @@ public class CartDAO implements DAO{
         }
     }
 
+
+    // 장바구니 추가 관련 기능
+    // 참조하는 상품명을 따로 리스트를 불러와서 추가하는 구현 기능
     @Override
     public void insertList() {
         Scanner sc = new Scanner(System.in);
+        Map view = new HashMap();
 
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM PRODUCTS";
+            rs = stmt.executeQuery(query);
 
-        System.out.print("가구번호를 입력하세요.");
+            while(rs.next()) {
+                int id = rs.getInt("PRODUCT_ID");
+                String name = rs.getString("PRODUCT_NAME");
+                int price = rs.getInt("PRICE");
+                view.put(id,name+" ("+price+"원)");
+            }
+            Common.close(rs);
+            Common.close(stmt);
+            Common.close(conn);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        view.forEach((key, value) -> {
+            System.out.println("["+key+"]" + " : " + value);
+        });
+
+        System.out.print("장바구니에 넣을 가구를 선택해주세요 [숫자 입력]");
         int PDT_NO_NUMBER = sc.nextInt();
         System.out.print("유저아이디를 입력해주세요.");
         String user_id_cart = sc.next();
@@ -115,6 +141,7 @@ public class CartDAO implements DAO{
         Common.close(pstmt);
         Common.close(conn);
     }
+
 
 
 
