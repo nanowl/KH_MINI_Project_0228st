@@ -2,19 +2,18 @@ package com.kh.mini;
 
 import com.kh.mini.dao.*;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class JdbcMain {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        shopView("Ralo11");
+        mainView();
     }
-
+    // 로그인 화면 UI 메소드
     public static void mainView()  {
         CustomerDAO customerDAO = new CustomerDAO();
         while (true) {
-            System.out.print("========= 온라인 가구 샵 =========");
+            System.out.println("========= 온라인 가구 샵 =========");
             System.out.print("[1]로그인, [2]회원가입, [3]EXIT : ");
             int sel = sc.nextInt();
             switch (sel) {
@@ -40,35 +39,32 @@ public class JdbcMain {
         }
     }
 
+    // 가구 쇼핑몰의 UI 메소드
     public static void shopView(String id) {
+        System.out.println("========= 온라인 가구 샵 =========");
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.selectList();
         while (true) {
-            System.out.print("========= 온라인 가구 샵 =========");
-            System.out.print("[1]상품보기 [2]장바구니담기 [3]장바구니보기 [4]구매 [5]구매내역 [6]나가기 : ");
+            System.out.print("[1]장바구니담기 [2]장바구니보기 [3]구매 [4]구매내역 [5]나가기 : ");
             int sel = sc.nextInt();
             switch (sel) {
                 case 1 :
-                    ProductDAO productDAO = new ProductDAO();
-                    productDAO.selectList();
+                    CartDAO cartDAO = new CartDAO();
+                    cartDAO.insertList(id);
                     break;
                 case 2 :
-                    CartDAO cartDAO = new CartDAO();
-                    cartDAO.insertList();
-                    break;
-                case 3 :
                     CartDAO cartDAO1 = new CartDAO();
                     cartDAO1.viewCart(id);
-                    //장바구니의 상품번호를 대신해서 상품이름을 조회
-                    //Products 테이블이랑 조인해서 가져올것
                     break;
-                case 4 :
+                case 3 :
                     OrderDAO orderDAO = new OrderDAO();
                     orderDAO.insertList();
                     break;
-                case 5 :
+                case 4 :
                     OrderDAO orderDAO1 = new OrderDAO();
                     orderDAO1.selectList(id);
                     break;
-                case 6 :
+                case 5 :
                     System.out.print("종료");
                     break;
             }

@@ -17,10 +17,9 @@ public class ProductDAO implements DAO {
     Statement stmt = null;
     PreparedStatement  pstmt = null;
     ResultSet rs = null;
-    static List<Products> list = new ArrayList<>();
+    List<Products> list = new ArrayList<>();
+
     public List<Products> listProducts() {
-
-
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
@@ -79,15 +78,16 @@ public class ProductDAO implements DAO {
 
     @Override
     public void selectList() {
-            for(Products e : list) {
-                System.out.print(e.getProductId() + " ");
-                System.out.print(e.getProductName() + " ");
-                System.out.print(e.getColor() + " ");
-                System.out.print(e.getPrice() + " ");
-                System.out.print(e.getMade() + " ");
-                System.out.println();
-            }
+        listProducts();
+        for(Products e : list) {
+            System.out.print(e.getProductId() + " ");
+            System.out.print(e.getProductName() + " ");
+            System.out.print(e.getColor() + " ");
+            System.out.print(e.getPrice() + " ");
+            System.out.print(e.getMade() + " ");
+            System.out.println();
         }
+    }
 
 
     @Override
